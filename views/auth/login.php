@@ -1,96 +1,111 @@
-<?php
-session_start();
-
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Contoh login sederhana (tanpa database)
-    if ($username === "Debby" && $password === "12345") {
-        $_SESSION['login'] = true;
-        $_SESSION['username'] = $username;
-
-        header("Location: dashboard.php");
-        exit;
-    } else {
-        $error = "Username atau password salah!";
-    }
-}
-?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login | Perpustakaan</title>
     <style>
         body {
             margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
             height: 100vh;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #b2dfdb, #e0f2f1);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
-        .login-box {
+        .login-container {
             background: #ffffff;
-            padding: 35px 40px;
-            border-radius: 20px;
-            width: 320px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 30px 35px;
+            width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        h2 {
+        .login-container h2 {
             text-align: center;
-            color: #00796b;
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .login-container p {
+            text-align: center;
+            color: #607d8b;
+            font-size: 14px;
             margin-bottom: 25px;
         }
 
-        input {
+        .login-container input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             margin-bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid #b2dfdb;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
             font-size: 14px;
         }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #00796b;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+        .login-container input:focus {
+            outline: none;
+            border-color: #1e88e5;
+            box-shadow: 0 0 5px rgba(30, 136, 229, 0.3);
         }
 
-        .error {
-            color: red;
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: #1e88e5;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-container button:hover {
+            background: #1565c0;
+        }
+
+        .login-container .register {
             text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .login-container .register a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-container .register a:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 40px;
             margin-bottom: 10px;
+            color: #1e88e5;
         }
     </style>
 </head>
 <body>
 
-<div class="login-box">
-    <h2>🔐 Login</h2>
+<div class="login-container">
+    <div class="icon">📚</div>
+    <h2>Login Perpustakaan</h2>
+    <p>Silakan masuk untuk mengakses sistem</p>
 
-    <?php if (isset($error)) : ?>
-        <div class="error"><?= $error ?></div>
-    <?php endif; ?>
-
-    <form method="POST">
+    <form method="post" action="../../controllers/c_login.php">
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
-                <a href="dasboard.php?page=login" class="card">
         <button type="submit" name="login">Login</button>
-        
     </form>
+
+    <div class="register">
+        Belum punya akun? <a href="register.php">Daftar di sini</a>
+    </div>
 </div>
 
 </body>

@@ -1,4 +1,11 @@
- 
+<?php
+session_start();
+if (!isset($_SESSION['id_user']) || $_SESSION['role'] != 'admin') {
+    header("Location: ../auth/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -16,8 +23,28 @@
         }
 
         h2 {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             color: #333;
+        }
+
+        .welcome-box {
+            background: linear-gradient(135deg, #1e88e5, #42a5f5);
+            color: white;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .welcome-box h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .welcome-box p {
+            margin-top: 8px;
+            font-size: 15px;
+            opacity: 0.95;
         }
 
         .dashboard {
@@ -67,27 +94,29 @@
 <div class="container">
     <h2>📊 Dashboard Admin</h2>
 
+    <!-- Sambutan -->
+    <div class="welcome-box">
+        <h3>📚 Selamat Datang di Portal Perpustakaan Digital By Debby</h3>
+        <p>
+            Kelola data buku, peminjaman, dan anggota perpustakaan secara mudah,
+            cepat, dan terintegrasi dalam satu sistem.
+        </p>
+    </div>
+
     <div class="dashboard">
-        <a href="buku.php?page=buku" class="card">
+        <a href="peminjaman_adm.php?page=buku" class="card">
             <div class="card-icon bg-blue">📚</div>
-            <div class="card-title">Data Buku</div>
-            <div class="card-desc">Kelola data buku perpustakaan</div>
+            <div class="card-title">Data Peminjaman</div>
+            <div class="card-desc">Kelola transaksi peminjaman buku</div>
         </a>
 
         <a href="anggota.php?page=anggota" class="card">
             <div class="card-icon bg-green">👥</div>
             <div class="card-title">Data Anggota</div>
-            <div class="card-desc">Kelola data anggota</div>
-        </a>
-
-        <a href="index.php?page=laporan" class="card">
-            <div class="card-icon bg-orange">📄</div>
-            <div class="card-title">Laporan</div>
-            <div class="card-desc">Lihat laporan peminjaman</div>
+            <div class="card-desc">Kelola data anggota perpustakaan</div>
         </a>
     </div>
 </div>
 
 </body>
 </html>
-

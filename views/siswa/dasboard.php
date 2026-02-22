@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['id_user']) || $_SESSION['role'] != 'siswa') {
+    header("Location: ../auth/login.php");
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -69,10 +77,11 @@
     <h2>🎒 Dashboard Siswa</h2>
 
     <div class="dashboard">
-        <a href="peminjaman.php?page=peminjaman" class="card">
+        <a href="data_buku.php?page=peminjaman" class="card">
             <div class="icon">📚</div>
-            <div class="title">Peminjaman</div>
-            <div class="desc">Lihat & kelola buku yang dipinjam</div>
+            <div class="title">Pustaka Peminjaman & Pengembalian Buku
+            </div>
+            <div class="desc">Lihat Data & Stok Buku Yang Tersedia </div>
         </a>
     </div>
 </div>
